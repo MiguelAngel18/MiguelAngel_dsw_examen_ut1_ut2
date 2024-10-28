@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controlador;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/messages', function () {
-    $messages = \App\Models\Message::all();
-    return view('messages', ['messages' => $messages]);
-});
+Route::get('/messages', [Controlador::class, 'showMessages'])->name("messages");
+
+// Editar y guardar messages
+Route::get('/messages/{id}/edit', [Controlador::class, 'editMessage'])->name("edit");
+Route::put('/messages/{id}', [Controlador::class, 'updateMessage'])->name("update");
